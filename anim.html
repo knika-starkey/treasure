@@ -7,25 +7,50 @@
     <title>Document</title>
   </head>
   <body>
-    <button onclick="add_text('block', '1234567890')">Додати текст</button>
+    <button id="add_text">Додати текст</button>
     <div id="block"></div>
     <script>
-      function add_text(id, text) {
+      let textArr = [
+        "She comes in colours everywhere",
+        "She combs her hair",
+        "She's like a rainbow",
+        "Coming, colours in the air",
+        "Oh, everywhere",
+        "She comes in colours",
+      ];
+      let colors = [
+        "red",
+        "orange",
+        "gold",
+        "green",
+        "blue",
+        "indigo",
+        "violet",
+      ];
+      add_text.addEventListener("click", function () {
+        addTextFunc(
+          "block",
+          textArr[Math.floor(Math.random() * textArr.length)]
+        );
+      });
+      function addTextFunc(id, text) {
+        let timer;
         let elem = document.getElementById(id);
-        let pos = 0; // начальне значення, відповідає першій літері
+        let pos = 0;
 
         function addLetter() {
-          // функція для друку літер
+          //console.log(colors[Math.floor(Math.random() * colors.length)]);
+
+          elem.innerHTML += `<span style="color:${
+            colors[Math.floor(Math.random() * colors.length)]
+          };">${text[pos]}</span>`;
+
           pos++;
-          elem.innerHTML = text.substring(0, pos); // в elem.innerHTML друкуємо підрядок text  довжиною від 0 до pos символів
           if (text.length <= pos) {
             clearInterval(timer);
-            // слово надруковано повністю
-            // завершити анімацію
           }
         }
-        let timer = setInterval(addLetter, 1000);
-        // викликати функцію addLetter() кожні 1000 мс
+        timer = setInterval(addLetter, 1000);
       }
     </script>
   </body>
