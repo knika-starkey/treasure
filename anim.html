@@ -8,6 +8,7 @@
   </head>
   <body>
     <button id="add_text">Додати текст</button>
+    <button id="clear">Видалити текст</button>
     <div id="block"></div>
     <script>
       let textArr = [
@@ -27,6 +28,7 @@
         "indigo",
         "violet",
       ];
+      let timer;
       add_text.addEventListener("click", function () {
         addTextFunc(
           "block",
@@ -34,7 +36,6 @@
         );
       });
       function addTextFunc(id, text) {
-        let timer;
         let elem = document.getElementById(id);
         let pos = 0;
 
@@ -51,6 +52,14 @@
           }
         }
         timer = setInterval(addLetter, 1000);
+      }
+      clear.addEventListener("click", function () {
+        clearText("block");
+      });
+      function clearText(id) {
+        clearInterval(timer);
+        let elem = document.getElementById(id);
+        elem.innerHTML = "";
       }
     </script>
   </body>
